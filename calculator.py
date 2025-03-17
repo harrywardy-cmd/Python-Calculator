@@ -5,6 +5,10 @@ LARGE_FONT_STYLE = ("Arial", 40)
 
 DIGIT_FONT_STYLE = ("Arial", 16, "bold")
 
+DEFAULT_FONT_STYLE = ("Arial", 20)
+
+
+OFF_WHITE = "#F8FAFF"
 LIGHT_GRAY = "#F5F5F5"
 LABLE_COLOR = "#25265E"
 WHITE = "#FFFFFF"
@@ -25,11 +29,12 @@ class Calculator:
             0:(4,2), '.':(4,1)
         }
         
-        self.operations = {"/": "\u00F7", "*": "\00D7", "-":"-","+":"+"}
+        self.operations = {"/": "\u00F7", "*": "\u00D7", "-":"-","+":"+"}
 
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_button_frame()
         self.create_digit_buttons()
+        self.create_operator_buttons()
 
         self.total_lable, self.lable = self.create_display_lables()
 
@@ -46,6 +51,13 @@ class Calculator:
         frame = tk.Frame(self.window, height=221, bg=LIGHT_GRAY)
         frame.pack(expand=True, fill="both")
         return frame
+
+    def create_operator_buttons(self):
+        i=0
+        for operator, symbol in self.operations.items():
+            button = tk.Button(self.buttons_frame, text=symbol, bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+            button.grid(row=i,column=4,sticky=tk.NSEW)
+            i+=1
 
     def create_digit_buttons(self):
         for digit,grid_value in self.digits.items():
