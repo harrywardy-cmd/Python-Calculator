@@ -3,6 +3,8 @@ import tkinter as tk
 SMALL_FONT_STYLE = ("Arial", 16, "bold")
 LARGE_FONT_STYLE = ("Arial", 40)
 
+DIGIT_FONT_STYLE = ("Arial", 16, "bold")
+
 LIGHT_GRAY = "#F5F5F5"
 LABLE_COLOR = "#25265E"
 WHITE = "#FFFFFF"
@@ -23,6 +25,7 @@ class Calculator:
             0:(4,2), '.':(4,1)
         }
         
+        self.operations = {"/": "\u00F7", "*": "\00D7", "-":"-","+":"+"}
 
         self.display_frame = self.create_display_frame()
         self.buttons_frame = self.create_button_frame()
@@ -46,7 +49,7 @@ class Calculator:
 
     def create_digit_buttons(self):
         for digit,grid_value in self.digits.items():
-            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABLE_COLOR)
+            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABLE_COLOR, font= DIGIT_FONT_STYLE, borderwidth=0)
             button.grid(row=grid_value[0], column=grid_value[1],sticky=tk.NSEW)
  
 
