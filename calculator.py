@@ -87,12 +87,27 @@ class Calculator:
             button.grid(row=i,column=4,sticky=tk.NSEW)
             i+=1
 
+    def clear(self):
+        self.current_expression = ""
+        self.total_expression = ""
+        self.update_lable()
+        self.update_total_lable()
+
     def create_clear_button(self):
-        button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+        button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0,command=self.clear)
         button.grid(row=0,column=1, columnspan=3,sticky=tk.NSEW)
 
+    def evaluate(self):
+        self.total_expression += self.current_expression
+        self.update_total_lable()
+
+        self.current_expression = str(eval(self.total_expression))
+
+        self.total_expression = ""
+        self.update_lable()
+
     def create_equals_button(self):
-        button = tk.Button(self.buttons_frame, text="=", bg=LIGHT_BLUE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+        button = tk.Button(self.buttons_frame, text="=", bg=LIGHT_BLUE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0,command=self.evaluate)
         button.grid(row=4,column=3, columnspan=2,sticky=tk.NSEW)
 
     def create_button_frame(self):
