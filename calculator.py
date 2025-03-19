@@ -20,8 +20,8 @@ class Calculator:
         self.window.resizable(0,0)
         self.window.title("Calculator")
 
-        self.total_expression = "0"
-        self.current_expression = "0"
+        self.total_expression = ""
+        self.current_expression = ""
 
         self.digits = {
             7: (1,1), 8: (1,2), 9: (1,3),
@@ -71,9 +71,13 @@ class Calculator:
             button.grid(row=i,column=4,sticky=tk.NSEW)
             i+=1
 
+    def add_to_expression(self,value):
+        self.current_expression += str(value)
+        self.update_lable()
+
     def create_digit_buttons(self):
         for digit,grid_value in self.digits.items():
-            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABLE_COLOR, font= DIGIT_FONT_STYLE, borderwidth=0)
+            button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABLE_COLOR, font= DIGIT_FONT_STYLE, borderwidth=0,command=lambda x=digit:self.add_to_expression(digit))
             button.grid(row=grid_value[0], column=grid_value[1],sticky=tk.NSEW)
     
     def create_clear_button(self):
@@ -88,6 +92,13 @@ class Calculator:
         frame = tk.Frame(self.window)
         frame.pack(expand=True, fill="both")
         return frame
+    
+    def uddate_total_lable(self):
+        self.total_expression.config(text=self.total_expression)
+    
+    def update_lable(self):
+        self.lable.config(text=self.current_expression)
+
 
     def run(self):
         self.window.mainloop()
