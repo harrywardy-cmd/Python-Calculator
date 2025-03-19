@@ -64,13 +64,6 @@ class Calculator:
         frame.pack(expand=True, fill="both")
         return frame
 
-    def create_operator_buttons(self):
-        i=0
-        for operator, symbol in self.operations.items():
-            button = tk.Button(self.buttons_frame, text=symbol, bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0)
-            button.grid(row=i,column=4,sticky=tk.NSEW)
-            i+=1
-
     def add_to_expression(self,value):
         self.current_expression += str(value)
         self.update_lable()
@@ -80,6 +73,20 @@ class Calculator:
             button = tk.Button(self.buttons_frame, text=str(digit), bg=WHITE, fg=LABLE_COLOR, font= DIGIT_FONT_STYLE, borderwidth=0,command=lambda x=digit:self.add_to_expression(digit))
             button.grid(row=grid_value[0], column=grid_value[1],sticky=tk.NSEW)
     
+    def append_operator(self, operator):
+        self.current_expression += operator
+        self.total_expression += self.current_expression
+        self.current_expression = ""
+        self.update_total_lable()
+        self.update_lable()
+
+    def create_operator_buttons(self):
+        i=0
+        for operator, symbol in self.operations.items():
+            button = tk.Button(self.buttons_frame, text=symbol, bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0, command = lambda x=operator:self.append_operator(x))
+            button.grid(row=i,column=4,sticky=tk.NSEW)
+            i+=1
+
     def create_clear_button(self):
         button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0)
         button.grid(row=0,column=1, columnspan=3,sticky=tk.NSEW)
@@ -93,7 +100,7 @@ class Calculator:
         frame.pack(expand=True, fill="both")
         return frame
     
-    def uddate_total_lable(self):
+    def update_total_lable(self):
         self.total_expression.config(text=self.total_expression)
     
     def update_lable(self):
