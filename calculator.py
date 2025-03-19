@@ -15,6 +15,8 @@ LABLE_COLOR = "#25265E"
 WHITE = "#FFFFFF"
 class Calculator:
     def __init__(self):
+        
+        #creates app window with settings
         self.window = tk.Tk()
         self.window.geometry("375x667")
         self.window.resizable(0,0)
@@ -23,6 +25,7 @@ class Calculator:
         self.total_expression = ""
         self.current_expression = ""
 
+        #hashmap holding all the digit information for the buttons
         self.digits = {
             7: (1,1), 8: (1,2), 9: (1,3),
             4: (2,1), 5: (2,2), 6:(2,3),
@@ -37,6 +40,8 @@ class Calculator:
 
         self.buttons_frame.rowconfigure(0, weight=1)
 
+
+        #creates grid for the buttons, loaded from a hashmap
         for x in range(1,5):
             self.buttons_frame.rowconfigure(x, weight=1)
             self.buttons_frame.columnconfigure(x,weight=1)
@@ -97,6 +102,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="C", bg=OFF_WHITE, fg=LABLE_COLOR, font=DEFAULT_FONT_STYLE, borderwidth=0,command=self.clear)
         button.grid(row=0,column=1, columnspan=3,sticky=tk.NSEW)
 
+    #this will handle the logic with pythons eval() function
     def evaluate(self):
         self.total_expression += self.current_expression
         self.update_total_lable()
@@ -121,12 +127,10 @@ class Calculator:
     def update_lable(self):
         self.lable.config(text=self.current_expression)
 
-
     def run(self):
         self.window.mainloop()
 
 if __name__ == "__main__":
     calc = Calculator()
     calc.run()
-    print("we are running!")
 
