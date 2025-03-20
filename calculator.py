@@ -39,6 +39,7 @@ class Calculator:
         self.buttons_frame = self.create_button_frame()
 
         self.buttons_frame.rowconfigure(0, weight=1)
+        self.bind_keys()
 
 
         #creates grid for the buttons, loaded from a hashmap
@@ -51,6 +52,16 @@ class Calculator:
         self.create_special_buttons()
 
         self.total_lable, self.lable = self.create_display_lables()
+
+    def bind_keys(self):
+        self.window.bind("<Return>", lambda event:self.evaluate())
+
+        for key in self.digits:
+            self.window.bind(str(key), lambda event,digit=key:self.add_to_expression(digit))
+        
+        for key in self.operations:
+            self.window.bind(key, lambda event, operator=key:self.append_operator(operator))
+
     def create_special_buttons(self):
         self.create_clear_button()
         self.create_equals_button()
