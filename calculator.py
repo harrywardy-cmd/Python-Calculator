@@ -141,7 +141,10 @@ class Calculator:
         return frame
     
     def update_total_lable(self):
-        self.total_lable.config(text=self.total_expression)
+        expression = self.total_expression
+        for operator, symbol in self.operations.items():
+            expression = expression.replace(operator, f'{symbol}')
+        self.total_lable.config(text=expression)
     
     def update_lable(self):
         self.lable.config(text=self.current_expression)
