@@ -78,8 +78,7 @@ Designed to run on both Windows and macOS using only standard Python dependencie
 * State Management
 * User Input Handling
   
-```
-```
+
 # Application Architecture
 
 ```text
