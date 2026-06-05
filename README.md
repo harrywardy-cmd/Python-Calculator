@@ -77,35 +77,55 @@ Designed to run on both Windows and macOS using only standard Python dependencie
 * GUI Development
 * State Management
 * User Input Handling
-
----
-
+  
+```
+```
 # Application Architecture
 
-```text id="calcarch"
-Calculator Application
+```text
+Python Calculator
 │
-├── User Interface Layer
-│   ├── Display Components
-│   ├── Button Grid
+├── User Interface Layer (Tkinter)
+│   ├── Calculator Window
+│   ├── Display Labels
+│   ├── Button Components
 │   └── Layout Management
 │
 ├── Event Handling Layer
-│   ├── Button Events
-│   ├── Keyboard Events
-│   └── Input Processing
+│   ├── Button Click Events
+│   ├── Keyboard Input Events
+│   └── Command Routing
 │
 ├── Calculation Engine
-│   ├── Expression Evaluation
-│   ├── Square Operations
-│   └── Square Root Operations
+│   ├── Arithmetic Operations
+│   ├── Square Function
+│   ├── Square Root Function
+│   └── Expression Evaluation
 │
 └── Application State
-    ├── Current Expression
+    ├── Current Input
+    ├── Total Expression
     └── Display Updates
 ```
 
----
+### Core Components
+
+#### User Interface Layer
+
+Responsible for rendering the calculator window, managing button layouts, and displaying user input and calculation results.
+
+#### Event Handling Layer
+
+Processes user interactions through button clicks and keyboard shortcuts, translating user actions into calculator operations.
+
+#### Calculation Engine
+
+Handles mathematical expression evaluation and specialised functions such as square and square root calculations.
+
+#### State Management
+
+Maintains the current expression, calculation history, and display values while ensuring the user interface remains synchronised with application data.
+
 
 # Technical Challenges Solved
 
